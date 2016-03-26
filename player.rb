@@ -15,7 +15,12 @@ class Player
     # if 0 cards on table
     if community_cards.size == 0 && current_player
       if (has_two_pair?(hole_cards) || has_same_suit?(hole_cards))
-        return return_corrected(current_buy_in - current_player["bet"] + minimum_raise)
+        bet = current_buy_in - current_player["bet"] + minimum_raise
+        if bet > current_player['stack'] / 2
+          return 0
+        else
+          return return_corrected(bet)
+        end
       end
 
       if @game_state['current_buy_in'] > 150 && current_player["bet"] < 150
