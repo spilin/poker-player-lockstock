@@ -45,7 +45,7 @@ class Player
       rank = PokerRanking::Hand.new(cards).data[:rank] rescue 0
       return 0 if rank == 0
 
-      if rank > 3
+      if rank > 2
         return return_corrected(10000);
       end
 
