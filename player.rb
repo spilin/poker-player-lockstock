@@ -9,6 +9,7 @@ class Player
 
     current_buy_in = game_state["current_buy_in"].to_i
     minimum_raise = game_state["minimum_raise"].to_i
+    minimum_raise = game_state["small_blind"] * 2 if minimum_raise == 0
     # if has_two_pair?(current_player["hole_cards"])
     #   game_state["minimum_raise"] * 3
     # else
