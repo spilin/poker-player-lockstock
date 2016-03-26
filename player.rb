@@ -1,6 +1,5 @@
 
 class Player
-  CURRENT_PLAYER_NAME = 'LockStock'
 
   VERSION = "Lock, Stock and Two Smoking Barrels"
 
@@ -10,15 +9,12 @@ class Player
     current_buy_in = game_state["current_buy_in"].to_i
     minimum_raise = game_state["minimum_raise"].to_i
     minimum_raise = game_state["small_blind"] * 2 if minimum_raise == 0
-    # if has_two_pair?(current_player["hole_cards"])
-    #   game_state["minimum_raise"] * 3
-    # else
-    # end
+
+    if current_player && has_two_pair?(current_player["hole_cards"])
+      return (current_buy_in + minimum_raise * 2)
+    end
 
     current_buy_in + minimum_raise
-
-# current_buy_in - players[in_action][bet] + minimum_raise
-
   rescue
     rand(500)
   end
@@ -51,6 +47,6 @@ class Player
   private
 
   def current_player
-    @current_player ||= @game_state['players'].detect { |player| player['name'] == CURRENT_PLAYER_NAME }
+    @current_player ||= @game_state['players'].detect { |player| player['id'] == @game_state['in_action'] }
   end
 end
