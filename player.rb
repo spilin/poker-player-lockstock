@@ -14,15 +14,19 @@ class Player
     hole_cards = current_player["hole_cards"] if current_player
 
     # raise if two pairs
-    if current_player && has_two_pair?(hole_cards + community_cards)
+    if current_player && (community_cards.size == 0) && has_two_pair?(hole_cards)
       return (current_buy_in + minimum_raise)
     end
 
-    # drop if no pairs and all cards on board
-    if current_player && community_cards.count == 5 && !has_two_pair?(hole_cards + community_cards)
-      return 0
-    end
+    if current_player && community_cards.count >= 3
+      cards = (hole_cards + community_cards).map { |card| "#{card["rank"]} of #{card["suit"].capitalize}" }
+      rank = PokerRanking::Hand.new(cards).data[:rank] rescue 0
+      return 0 if rank == 0
 
+      if rank > 0
+        return (current_buy_in + minimum_raise)
+      end
+    end
 
     current_buy_in + minimum_raise
   rescue StandardError => e

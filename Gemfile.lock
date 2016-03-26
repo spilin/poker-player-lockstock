@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.2.5)
+    poker-ranking (1.1.2)
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
@@ -25,6 +26,10 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
+  poker-ranking
   rake
   rspec
   sinatra
+
+BUNDLED WITH
+   1.11.2
