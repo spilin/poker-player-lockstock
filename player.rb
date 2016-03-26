@@ -23,6 +23,10 @@ class Player
       rank = PokerRanking::Hand.new(cards).data[:rank] rescue 0
       return 0 if rank == 0
 
+      if rank > 3
+        return 10000;
+      end
+
       if rank > 0
         return (current_buy_in + minimum_raise)
       end

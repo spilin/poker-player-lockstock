@@ -30,6 +30,3 @@ DEPENDENCIES
   rake
   rspec
   sinatra
-
-BUNDLED WITH
-   1.11.2
