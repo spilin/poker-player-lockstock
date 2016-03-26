@@ -16,7 +16,11 @@ class Player
     if community_cards.size == 0 && current_player
       bet = current_buy_in - current_player["bet"] + minimum_raise
       if has_two_pair?(hole_cards)
-        return return_corrected(bet)
+        if cool_rank?(hole_cards)
+          return return_corrected(10000)
+        else
+          return return_corrected(bet)
+        end
       elsif has_same_suit?(hole_cards)
         if bet > (current_player['stack'] / 4)
           return 0
