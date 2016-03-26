@@ -19,7 +19,7 @@ class Player
     end
 
     # drop if no pairs and all cards on board
-    if current_player && community_cards.any? && !has_two_pair?(hole_cards + community_cards)
+    if current_player && community_cards.count == 5 && !has_two_pair?(hole_cards + community_cards)
       return 0
     end
 
