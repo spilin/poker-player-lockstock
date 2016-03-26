@@ -7,11 +7,16 @@ class Player
   def bet_request(game_state)
     @game_state = game_state
 
+    current_buy_in = game_state["current_buy_in"].to_i
+    minimum_raise = game_state["minimum_raise"].to_i
     # if has_two_pair?(current_player["hole_cards"])
     #   game_state["minimum_raise"] * 3
     # else
     # end
-      game_state["small_blind"] * 4
+
+    current_buy_in + minimum_raise
+
+# current_buy_in - players[in_action][bet] + minimum_raise
 
   rescue
     rand(500)
