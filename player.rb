@@ -9,10 +9,20 @@ class Player
     current_buy_in = game_state["current_buy_in"].to_i
     minimum_raise = game_state["minimum_raise"].to_i
     minimum_raise = game_state["small_blind"] * 2 if minimum_raise == 0
+    community_cards = game_state["community_cards"]
+    hole_cards = []
+    hole_cards = current_player["hole_cards"] if current_player
 
-    if current_player && has_two_pair?(current_player["hole_cards"] + @game_state["community_cards"])
+    # raise if two pairs
+    if current_player && has_two_pair?(hole_cards + community_cards)
       return (current_buy_in + minimum_raise * 2)
     end
+
+    # drop if no pairs and all cards on board
+    if current_player && community_cards.any? && !has_two_pair?(hole_cards + community_cards)
+      return 0
+    end
+
 
     current_buy_in + minimum_raise
   # rescue
