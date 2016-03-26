@@ -14,7 +14,7 @@ class Player
     hole_cards = current_player["hole_cards"] if current_player
 
     # raise if two pairs
-    if current_player && (community_cards.size == 0) && has_two_pair?(hole_cards)
+    if current_player && (community_cards.size == 0) && (has_two_pair?(hole_cards) || has_same_suit?(cards))
       return (current_buy_in + minimum_raise)
     end
 
@@ -62,6 +62,12 @@ class Player
     ranks = cards.map { |card| card["rank"] }
 
     ranks.uniq.count != ranks.count
+  end
+
+  def has_same_suit?(cards)
+    suits = cards.map { |card| card["suit"] }
+
+    suits.uniq.count != suits.count
   end
 
   private
