@@ -10,13 +10,13 @@ class Player
     minimum_raise = game_state["minimum_raise"].to_i
     minimum_raise = game_state["small_blind"] * 2 if minimum_raise == 0
 
-    if current_player && has_two_pair?(current_player["hole_cards"])
+    if current_player && has_two_pair?(current_player["hole_cards"] + @game_state["community_cards"])
       return (current_buy_in + minimum_raise * 2)
     end
 
     current_buy_in + minimum_raise
-  rescue
-    rand(500)
+  # rescue
+  #   rand(500)
   end
 
   def showdown(game_state)
