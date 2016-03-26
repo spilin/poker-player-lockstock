@@ -18,9 +18,9 @@ params = {
     "small_blind" =>  10,                              # The small blind in the current round. The big blind is twice the
                                                     #     small blind
 
-    "current_buy_in" =>  320,                          # The amount of the largest current bet from any one player
+    "current_buy_in" =>  1000,                          # The amount of the largest current bet from any one player
 
-    "pot" =>  400,                                     # The size of the pot (sum of the player bets)
+    "pot" =>  1340,                                     # The size of the pot (sum of the player bets)
 
     "minimum_raise" =>  240,                           # Minimum raise amount. To raise you have to return at least =>
                                                     #     current_buy_in - players[in_action][bet] + minimum_raise
@@ -55,21 +55,20 @@ params = {
         },
         {
             "id" =>  1,                                # Your own player looks similar, with one extension.
-            "name" =>  "Bob",
+            "name" =>  "LockStock",
             "status" =>  "active",
             "version" =>  "Default random player",
-            "stack" =>  1590,
-            "bet" =>  80,
+            "stack" =>  690,
+            "bet" =>  310,
             "hole_cards" =>  [                         # The cards of the player. This is only visible for your own player
-                                                    #     except after showdown, when cards revealed are also included.
-                {
-                    "rank" =>  "6",                    # Rank of the card. Possible values are numbers 2-10 and J,Q,K,A
-                    "suit" =>  "hearts"                # Suit of the card. Possible values are =>  clubs,spades,hearts,diamonds
-                },
-                {
-                    "rank" =>  "K",
-                    "suit" =>  "spades"
-                }
+              {
+                  "rank" =>  "Q",
+                  "suit" =>  "hearts"
+              },
+              {
+                  "rank" =>  "9",
+                  "suit" =>  "hearts"
+              }
             ]
         },
         {
@@ -83,16 +82,16 @@ params = {
     ],
     "community_cards" =>  [                            # Finally the array of community cards.
         {
-            "rank" =>  "4",
-            "suit" =>  "spades"
+            "rank" =>  "Q",
+            "suit" =>  "clubs"
         },
         {
             "rank" =>  "A",
-            "suit" =>  "hearts"
+            "suit" =>  "spades"
         },
         {
-            "rank" =>  "6",
-            "suit" =>  "clubs"
+            "rank" =>  "K",
+            "suit" =>  "hearts"
         }
     ]
 }
@@ -103,8 +102,20 @@ cards = [
       "suit" =>  "spades"
   },
   {
-      "rank" =>  "4",
-      "suit" =>  "hearts"
+      "rank" =>  "2",
+      "suit" =>  "clubs"
+  },
+  {
+      "rank" =>  "A",
+      "suit" =>  "spades"
+  },
+  {
+      "rank" =>  "5",
+      "suit" =>  "diamonds"
+  },
+  {
+      "rank" =>  "2",
+      "suit" =>  "spades"
   }
 ]
 
@@ -118,7 +129,7 @@ cards = [
 # puts hand.data
 
 # puts '*'*10
-# puts PokerRanking::Hand.new(cards).data.inspect
+puts PokerRanking::Hand.new(cards).data.inspect
 
 # puts cards.inspect
 # puts PokerRanking::Hand.new(cards).data

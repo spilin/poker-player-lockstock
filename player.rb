@@ -1,4 +1,3 @@
-
 class Player
 
   VERSION = "Lock, Stock and Two Smoking Barrels"
@@ -13,9 +12,15 @@ class Player
     hole_cards = []
     hole_cards = current_player["hole_cards"] if current_player
 
-    # raise if two pairs
-    if current_player && (community_cards.size == 0) && (has_two_pair?(hole_cards) || has_same_suit?(cards))
-      return (current_buy_in - current_player["bet"] + minimum_raise)
+    # if 0 cards on table
+    if community_cards.size == 0 && current_player
+      if (has_two_pair?(hole_cards) || has_same_suit?(hole_cards))
+        return return_corrected(current_buy_in - current_player["bet"] + minimum_raise)
+      end
+
+      if @game_state['current_buy_in'] > 150 && current_player["bet"] < 150
+        return 0
+      end
     end
 
     if current_player && community_cards.count >= 3
@@ -24,24 +29,27 @@ class Player
       return 0 if rank == 0
 
       if rank > 3
-        return 10000;
+        return return_corrected(10000);
       end
 
       if rank > 0
         # current_buy_in - players[in_action][bet] + minimum_raise
-        return (current_buy_in - current_player["bet"] + minimum_raise)
+        return return_corrected(current_buy_in - current_player["bet"] + minimum_raise)
       end
     end
 
-    if current_player && @game_state['current_buy_in'] > 150 && current_player["bet"] < 150 && community_cards.size == 0
-      return 0
-    end
-
-    (current_buy_in - current_player["bet"] + minimum_raise)
+    # default
+    return_corrected(current_buy_in - current_player["bet"] + minimum_raise)
   rescue StandardError => e
     puts '*'*100
     puts  e.inspect
     rand(500)
+  end
+
+  def return_corrected(result)
+    stack = current_player["stack"].to_i rescue 0
+
+    [result, stack].min
   end
 
   def showdown(game_state)
