@@ -14,12 +14,20 @@ class Player
 
     # if 0 cards on table
     if community_cards.size == 0 && current_player
-      if (has_two_pair?(hole_cards) || has_same_suit?(hole_cards))
-        bet = current_buy_in - current_player["bet"] + minimum_raise
-        if bet > current_player['stack'] / 2
+      bet = current_buy_in - current_player["bet"] + minimum_raise
+      if has_two_pair?(hole_cards)
+        return return_corrected(bet)
+      elsif has_same_suit?(hole_cards)
+        if bet > (current_player['stack'] / 4)
           return 0
         else
-          return return_corrected(bet)
+          return(return_corrected(bet))
+        end
+      elsif cool_rank?(hole_cards)
+        if bet > (current_player['stack'] / 4)
+          return 0
+        else
+          return(return_corrected(bet))
         end
       end
 
@@ -86,6 +94,12 @@ class Player
     suits = cards.map { |card| card["suit"] }
 
     suits.uniq.count != suits.count
+  end
+
+  def cool_rank?(cards)
+    ranks = cards.map { |card| card["rank"] }
+
+    (['A', 'K', 'J', 'Q'] - ranks).count < 4
   end
 
   private
