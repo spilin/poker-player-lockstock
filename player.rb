@@ -25,8 +25,10 @@ class Player
 
 
     current_buy_in + minimum_raise
-  # rescue
-  #   rand(500)
+  rescue StandardError => e
+    puts '*'*100
+    puts  e.inspect
+    rand(500)
   end
 
   def showdown(game_state)
@@ -57,6 +59,8 @@ class Player
   private
 
   def current_player
-    @current_player ||= @game_state['players'].detect { |player| player['id'] == @game_state['in_action'] }
+    @current_player ||= @game_state['players'].detect do |player|
+       (player['name'] == 'LockStock') || (player['id'] == @game_state['in_action'])
+    end
   end
 end
