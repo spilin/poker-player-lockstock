@@ -18,11 +18,11 @@ params = {
     "small_blind" =>  10,                              # The small blind in the current round. The big blind is twice the
                                                     #     small blind
 
-    "current_buy_in" =>  1000,                          # The amount of the largest current bet from any one player
+    "current_buy_in" =>  300,                          # The amount of the largest current bet from any one player
 
     "pot" =>  1340,                                     # The size of the pot (sum of the player bets)
 
-    "minimum_raise" =>  240,                           # Minimum raise amount. To raise you have to return at least =>
+    "minimum_raise" =>  20,                           # Minimum raise amount. To raise you have to return at least =>
                                                     #     current_buy_in - players[in_action][bet] + minimum_raise
 
     "dealer" =>  1,                                    # The index of the player on the dealer button in this round
@@ -58,16 +58,16 @@ params = {
             "name" =>  "LockStock",
             "status" =>  "active",
             "version" =>  "Default random player",
-            "stack" =>  690,
-            "bet" =>  310,
+            "stack" =>  980,
+            "bet" =>  20,
             "hole_cards" =>  [                         # The cards of the player. This is only visible for your own player
               {
-                  "rank" =>  "Q",
+                  "rank" =>  "10",
                   "suit" =>  "hearts"
               },
               {
-                  "rank" =>  "9",
-                  "suit" =>  "hearts"
+                  "rank" =>  "3",
+                  "suit" =>  "clubs"
               }
             ]
         },
@@ -81,18 +81,18 @@ params = {
         }
     ],
     "community_cards" =>  [                            # Finally the array of community cards.
-        {
-            "rank" =>  "Q",
-            "suit" =>  "clubs"
-        },
-        {
-            "rank" =>  "A",
-            "suit" =>  "spades"
-        },
-        {
-            "rank" =>  "K",
-            "suit" =>  "hearts"
-        }
+        # {
+        #     "rank" =>  "Q",
+        #     "suit" =>  "clubs"
+        # },
+        # {
+        #     "rank" =>  "A",
+        #     "suit" =>  "spades"
+        # },
+        # {
+        #     "rank" =>  "K",
+        #     "suit" =>  "hearts"
+        # }
     ]
 }
 

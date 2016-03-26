@@ -18,13 +18,13 @@ class Player
       if has_two_pair?(hole_cards)
         return return_corrected(bet)
       elsif has_same_suit?(hole_cards)
-        if bet > (current_player['stack'] / 4)
+        if current_player["bet"] > (current_player['stack'] / 4)
           return 0
         else
           return(return_corrected(bet))
         end
       elsif cool_rank?(hole_cards)
-        if bet > (current_player['stack'] / 4)
+        if current_player["bet"] > (current_player['stack'] / 4)
           return 0
         else
           return(return_corrected(bet))
