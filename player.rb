@@ -13,9 +13,15 @@ class Player
     hole_cards = []
     hole_cards = current_player["hole_cards"] if current_player
 
-    # raise if two pairs
-    if current_player && (community_cards.size == 0) && (has_two_pair?(hole_cards) || has_same_suit?(cards))
-      return (current_buy_in - current_player["bet"] + minimum_raise)
+    # if 0 cards on table
+    if community_cards.size == 0 && current_player
+      if (has_two_pair?(hole_cards) || has_same_suit?(cards))
+        return (current_buy_in - current_player["bet"] + minimum_raise)
+      end
+
+      if @game_state['current_buy_in'] > 150 && current_player["bet"] < 150
+        return 0
+      end
     end
 
     if current_player && community_cards.count >= 3
@@ -33,10 +39,7 @@ class Player
       end
     end
 
-    if current_player && @game_state['current_buy_in'] > 150 && current_player["bet"] < 150 && community_cards.size == 0
-      return 0
-    end
-
+    # default
     (current_buy_in - current_player["bet"] + minimum_raise)
   rescue StandardError => e
     puts '*'*100
