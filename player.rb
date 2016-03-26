@@ -15,7 +15,7 @@ class Player
 
     # raise if two pairs
     if current_player && (community_cards.size == 0) && (has_two_pair?(hole_cards) || has_same_suit?(cards))
-      return (current_buy_in + minimum_raise)
+      return (current_buy_in - current_player["bet"] + minimum_raise)
     end
 
     if current_player && community_cards.count >= 3
@@ -28,11 +28,16 @@ class Player
       end
 
       if rank > 0
-        return (current_buy_in + minimum_raise)
+        # current_buy_in - players[in_action][bet] + minimum_raise
+        return (current_buy_in - current_player["bet"] + minimum_raise)
       end
     end
 
-    current_buy_in + minimum_raise
+    if current_player && @game_state['current_buy_in'] > 150 && current_player["bet"] < 150 && community_cards.size == 0
+      return 0
+    end
+
+    (current_buy_in - current_player["bet"] + minimum_raise)
   rescue StandardError => e
     puts '*'*100
     puts  e.inspect
