@@ -33,9 +33,7 @@ class Player
         else
           return(return_corrected(bet))
         end
-      end
-
-      if @game_state['current_buy_in'] > 150 && current_player["bet"] < 150
+      else
         return 0
       end
     end
@@ -67,7 +65,7 @@ class Player
   def return_corrected(result)
     stack = current_player["stack"].to_i rescue 0
 
-    [result, stack].min
+    [result, (stack / 2).to_i].min
   end
 
   def showdown(game_state)
