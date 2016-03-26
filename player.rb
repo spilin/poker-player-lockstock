@@ -15,7 +15,7 @@ class Player
 
     # raise if two pairs
     if current_player && has_two_pair?(hole_cards + community_cards)
-      return (current_buy_in + minimum_raise * 2)
+      return (current_buy_in + minimum_raise + 1)
     end
 
     # drop if no pairs and all cards on board
