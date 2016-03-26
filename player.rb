@@ -52,7 +52,8 @@ class Player
     end
 
     # default
-    return_corrected(current_buy_in - current_player["bet"] + minimum_raise)
+    # return_corrected(current_buy_in - current_player["bet"] + minimum_raise)
+    return 0
   rescue StandardError => e
     puts '*'*100
     puts  e.inspect
