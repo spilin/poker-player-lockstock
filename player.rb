@@ -2,7 +2,7 @@
 class Player
   CURRENT_PLAYER_NAME = 'LockStock'
 
-  VERSION = "Default Ruby folding player"
+  VERSION = "Lock, Stock and Two Smoking Barrels"
 
   def bet_request(game_state)
     @game_state = game_state
@@ -14,6 +14,27 @@ class Player
 
   def showdown(game_state)
 
+  end
+
+# [
+#         {
+#             "rank": "4",
+#             "suit": "spades"
+#         },
+#         {
+#             "rank": "A",
+#             "suit": "hearts"
+#         },
+#         {
+#             "rank": "6",
+#             "suit": "clubs"
+#         }
+#     ]
+
+  def has_two_pair?(cards)
+    ranks = cards.map { |card| card["rank"] }
+
+    ranks.uniq.count != ranks.count
   end
 
   private
